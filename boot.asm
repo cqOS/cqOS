@@ -26,6 +26,7 @@ mov al, 10
 int 10h
 mov al, 13
 int 10h
+jmp woditel_texta
 well:
 mov al, 13
 int 10h
@@ -138,6 +139,17 @@ mov ah,2
 inc al
 int 10h
 jmp CHICKEING
-msg db 'wellcome to OS',10
+woditel_texta:
+mov si, text
+mov ah, 0x0E
+woditel_print:
+lodsb
+or al, al
+jz well
+int 10h
+ jmp woditel_print
+msg db 'wellcome to OS',0
+text db 'test text', 0
+woditeltexta db 'woditel texta v0.0.1',10,13,0
 times 510-($-$$) db 0
 dw 0xAA55
